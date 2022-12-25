@@ -13,7 +13,7 @@ const logout = async (req: NextApiRequest,res: NextApiResponse)=>{
                 }
             ),
             cookie.serialize(
-                'access', '', {
+                'refresh', '', {
                         httpOnly: true,
                         secure: process.env.NODE_ENV === "development" ? false : true,
                         expires: new Date(0),

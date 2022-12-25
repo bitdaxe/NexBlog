@@ -9,6 +9,29 @@ from django.conf import settings
 from django.middleware import csrf
 from rest_framework import status
 
+class LogoutView (APIView):
+    def post(self,request):
+        response = Response()   
+        response.set_cookie(
+                key = 'refresh', 
+                value = '',
+                max_age = settings.SIMPLE_JWT['ACCESS_DEAD_LIFETIME'],
+                secure = settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+                httponly = settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+                samesite = settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+        )
+        response.set_cookie(
+                key = 'access', 
+                value = '',
+                max_age = settings.SIMPLE_JWT['ACCESS_DEAD_LIFETIME'],
+                secure = settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+                httponly = settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+                samesite = settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+        )
+        csrf.get_token(request)
+        response.data = 'successfully loggedout!'
+        return response
+    
 class RegisterView(generics.CreateAPIView):
     model = User
     serializer_class = RegisterSerializer

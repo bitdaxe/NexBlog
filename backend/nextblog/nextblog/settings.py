@@ -49,6 +49,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 
 SIMPLE_JWT = {
+    'ACCESS_DEAD_LIFETIME': timedelta(minutes=30),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
@@ -87,7 +88,9 @@ SIMPLE_JWT = {
     'AUTH_COOKIE_SAMESITE': 'Lax',  # Whether to set the flag restricti
 
 }
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000'
+]
 
 
 MIDDLEWARE = [

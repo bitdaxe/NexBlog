@@ -3,17 +3,19 @@ import axios from 'axios'
 import { API_URL } from "../config";
 import useStore from "../store/useStore";
 import Navbar from "../components/navbar";
-
+import { useRouter } from 'next/router'
 const LoginPage: FC = (): JSX.Element => {
+    const router = useRouter()
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const login = useStore(state => state.login)
     const isAuth = useStore(state => state.isAuthenticated)
-
+ 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void =>{
         e.preventDefault();
-        login({username, password})
+        login({username, password}, router)
         console.log(isAuth);
+     
         
     }
 

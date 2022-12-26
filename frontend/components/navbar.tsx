@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from 'next/link'
 
 import useStore from "../store/useStore";
@@ -8,24 +8,45 @@ const Navbar = (): JSX.Element => {
     const isAuth = useStore(state => state.isAuthenticated)
     const logout = useStore(state => state.logout)
 
+    const [user, setUser] = useState<string |null>()
+
+    useEffect(()=>{
+        if (localStorage.getItem('user')){
+            setUser(localStorage.getItem('user')) 
+        }
+        console.log(user);
+        
+    }, [])
+
+
+
     const authneticated = (
+        <>
+          <button
+            type="button"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">
+                    <Link className="block py-2 pl-3 pr-4 text-white  rounded md:bg-transparent  md:p-0 "  href="/blog/create-post">Make Post</Link>
+            </button>
+            {/* {user ? <p class>{user}</p> : null} */}
             <button onClick={logout}
             type="button"
-            className="text-white  ml-5 bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">
-                    Logout
+            className="text-white  ml-5   focus:ring-4 focus:outline-none border-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0   ">
+                    Logout {user ? user : null}
             </button>
+        </>
+         
     )
 
     const notAuthenticated = (
         <>
         <button
             type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">
                     <Link className="block py-2 pl-3 pr-4 text-white  rounded md:bg-transparent  md:p-0 "  href="/login">Login</Link>
             </button>
             <button
             type="button"
-            className="text-white  ml-5 bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">
+            className="text-white  ml-5   focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 border-2  dark:focus:ring-cyan-800">
                     <Link className="block py-2 pl-3 pr-4 text-white  rounded md:bg-transparent  md:p-0 "  href="/register">Register</Link>
             </button>
         </>

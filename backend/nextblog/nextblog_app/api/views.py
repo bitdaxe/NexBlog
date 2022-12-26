@@ -6,6 +6,14 @@ from user_app.authenticate import CustomAuthentication
 from nextblog_app.api.permissions import TPermission
 
 # get blogs for (home page)
+class GetBlogView(generics.RetrieveAPIView):
+    authentication_classes = [CustomAuthentication]
+    permission_classes = [IsAuthenticated,TPermission]
+    # model = Blog
+    serializer_class = BlogSerializer
+    queryset = Blog.objects.all()
+    
+# get blogs for (home page)
 class GetBlogsView(generics.ListAPIView):
     authentication_classes = [CustomAuthentication]
     permission_classes = [IsAuthenticated,TPermission]

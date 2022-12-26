@@ -73,7 +73,7 @@ class LoginView(APIView):
                 )
                 
                 csrf.get_token(request)
-                response.data = {"Success" : "Login successfully","data":data}
+                response.data = {"Success" : "Login successfully","data":username}
                 return response
             else:
                 return Response({"No active" : "This account is not active!!"}, status=status.HTTP_404_NOT_FOUND)

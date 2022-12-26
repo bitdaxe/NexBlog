@@ -1,27 +1,16 @@
 import React, { FC, useState } from "react";
 import axios from 'axios'
 import { API_URL } from "../config";
+import useStore from "../store/useStore";
 
 const LoginPage: FC = (): JSX.Element => {
-    const [username, setUsername] = useState<string>();
-    const [password, setPassword] = useState<string>();
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const login = useStore(state => state.login)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void =>{
         e.preventDefault();
-        if(username != '' && password != ''){
-            console.log(username, password)
-            axios.post(`${API_URL}/account/login/` , {username, password}, {withCredentials: true, headers:{
-                // 'Access-Control-Allow-Credentials': true,
-        
-            }})
-            .then(res=>{
-                console.log(res.data)
-            })
-            .catch(err=>{
-                console.log(err)
-            })
-        }
-        
+        login({username, password})
     }
 
     return(

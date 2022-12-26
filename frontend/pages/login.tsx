@@ -2,19 +2,26 @@ import React, { FC, useState } from "react";
 import axios from 'axios'
 import { API_URL } from "../config";
 import useStore from "../store/useStore";
+import Navbar from "../components/navbar";
 
 const LoginPage: FC = (): JSX.Element => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const login = useStore(state => state.login)
+    const isAuth = useStore(state => state.isAuthenticated)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void =>{
         e.preventDefault();
         login({username, password})
+        console.log(isAuth);
+        
     }
 
     return(
-        <div className="container mx-auto xl:px-96 mt-32">
+        <>
+            <Navbar/>
+
+            <div className="container mx-auto xl:px-44 mt-32">
             
             <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-slate-700 text-white">
             <h1 className='text-center text-4xl font-mono'>NexBlog Login</h1>
@@ -41,6 +48,8 @@ const LoginPage: FC = (): JSX.Element => {
             </form>
 
         </div>
+        </>
+       
     )
 }
 

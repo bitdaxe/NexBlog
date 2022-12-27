@@ -7,6 +7,7 @@ Stack Used
 next js
 react , typescript
 django , drf (using http only cookie to save jwt token)
+tailwind css
 ```
 
 # HOME PAGE

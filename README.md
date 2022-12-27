@@ -2,6 +2,13 @@ DJANGO AMDIN :
 username: alvee
 pass: admin
 
+Stack Used
+```
+next js
+react , typescript
+django , drf
+```
+
 # HOME PAGE
 ![alt text](https://github.com/0xMALVEE/NexBlog/blob/main/demo/Screenshot%202022-12-27%20120513.png)
 

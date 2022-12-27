@@ -17,14 +17,14 @@ if (typeof window !== "undefined") {
     const connection = window.__REDUX_DEVTOOLS_EXTENSION__?.connect({
         name:"name Field"
     })
-    
+
     connection?.init(useStore.getState() )
     useStore.subscribe((newState)=>{
         connection?.send("State", newState)
     })
-  }
+}
 
 if (process.env.NODE_ENV === 'development') {
     mountStoreDevtool('Store', useStore);
-  
+
 }

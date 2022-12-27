@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-children-prop */
 import React, { useEffect } from "react"
 import Navbar from "../components/navbar";
@@ -27,7 +28,7 @@ const HomePage = (): JSX.Element=>{
           <a href="#">
               <h5 className="mb-2 text-2xl font-bold tracking-tight  dark:text-white">{blog.title}</h5>
           </a>
-          <p className="mb-3 font-normal ">Author: {blog.owner}</p>
+          <p className="mb-3 font-normal text-teal-500">Author: {blog.owner}</p>
         
           <p className="mb-3 font-normal "> <ReactMarkdown remarkPlugins={[remarkGfm]}  children={blog.description} /></p>
           <Link href={`/blog/${blog.id}`} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-cyan-700 rounded-lg hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-blue-800">

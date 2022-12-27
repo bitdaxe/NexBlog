@@ -6,7 +6,7 @@ Stack Used
 ```
 next js
 react , typescript
-django , drf
+django , drf (using http only cookie to save jwt token)
 ```
 
 # HOME PAGE

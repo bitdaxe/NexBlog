@@ -177,6 +177,12 @@ const Post = () => {
   useEffect(()=>{
   
     if(id !== undefined)
+    try {
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
     axios.get(`${API_URL}/api/blog/${id}`, {withCredentials: true})
     .then(res=>{
         console.log(res.data);

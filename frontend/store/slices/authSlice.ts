@@ -18,48 +18,46 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
         }
      
     },
-    login({username, password}, router) {
-        axios.post(`${API_URL}/account/login/` , {username, password}, {withCredentials: true, headers:{
-            // 'Access-Control-Allow-Credentials': true,
-        }})
-        .then(res=>{
+    async login({username, password}, router) {
+        try{
+            const res = await axios.post(`${API_URL}/account/login/` , {username, password}, {withCredentials: true, headers:{
+                // 'Access-Control-Allow-Credentials': true,
+            }})
+
             if(res.data.Success === "Login successfully"){
-                set(state => ({...state, isAuthenticated: true}))     
-                localStorage.setItem('authenticated', 'true')    
-    
-                
+                set(state => ({...state, isAuthenticated: true}))  
+
+                localStorage.setItem('authenticated', 'true')   
                 localStorage.setItem('user', JSON.stringify(res.data))
 
-                router.push('/')
-                
-                       
+                router.push('/') 
             }
-        })
-        .catch(err=>{
-        })
-      
+        }catch(err){
+            console.log(err);
+        }      
     },
-    logout(){
-        axios.post(`${API_URL}/account/logout/`,{},{withCredentials: true, headers:{
-            // 'Access-Control-Allow-Credentials': true,
-            'X-CSRFToken': Cookies.get('csrftoken')
-        }})
-        .then(res=>{
+    async logout(){
+        try{
+            const res = await axios.post(`${API_URL}/account/logout/`,{},{withCredentials: true, headers:{
+                // 'Access-Control-Allow-Credentials': true,
+                'X-CSRFToken': Cookies.get('csrftoken')
+            }})
+
             set(state => ({...state, isAuthenticated: false}))
             localStorage.removeItem('authenticated')
             localStorage.removeItem('user')
-        }).catch(er=>{
-            console.log(er);
-            
-        })
+
+        }catch(err){
+            console.log(err);            
+        }
      
     },
-    register({username, password, email}, router){
-        axios.post(`${API_URL}/account/register/` , {username, password, email}, {withCredentials: true, headers:{
-            // 'Access-Control-Allow-Credentials': true,
-        }})
-        .then(res=>{
-            console.log(res);
+    async register({username, password, email}, router){
+        try{
+            const res = await axios.post(`${API_URL}/account/register/` , {username, password, email}, {withCredentials: true, headers:{
+                // 'Access-Control-Allow-Credentials': true,
+            }})
+
             if(res.status == 201){
                 set(state => ({...state, isAuthenticated: true, user: {email: res.data.email, username: res.data.username, id: res.data.id}}))   
                 localStorage.setItem('authenticated', 'true') 
@@ -67,13 +65,9 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
                 get().login({username, password}, router)
           
             }
-            // if(res.data.Success === "Login successfully"){
-            //                  
-            // }
-        })
-        .catch(err=>{
-            console.log(err);
-        }) 
+        }catch(err){
+            console.log(err);            
+        }
     }
 })
 

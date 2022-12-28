@@ -7,16 +7,13 @@ import Cookies from 'js-cookie';
 
 const createBlogSlice: StateCreator<IBlog> = (set)=>({
     blogs:[],
-    loadBlogs(){
-        axios.get(`${API_URL}/api/blogs/`, {withCredentials: true})
-        .then(res=>{
-            // console.log(res.data);
+    async loadBlogs(){
+        try {
+            const res = await axios.get(`${API_URL}/api/blogs/`, {withCredentials: true})
             set(state => ({...state, blogs: res.data}))
-        })
-        .catch(err=>{
-            console.log(err);
-            
-        })
+        } catch (error) {
+            console.log(error);
+        }
     }
 })
 

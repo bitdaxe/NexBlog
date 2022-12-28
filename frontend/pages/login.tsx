@@ -14,9 +14,6 @@ const LoginPage: FC = (): JSX.Element => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void =>{
         e.preventDefault();
         login({username, password}, router)
-        console.log(isAuth);
-     
-        
     }
 
     return(

@@ -12,7 +12,9 @@ const Navbar = (): JSX.Element => {
 
     useEffect(()=>{
         if (localStorage.getItem('user')){
-            setUser(localStorage.getItem('user')) 
+            const userName = JSON.parse(localStorage.getItem('user') || '{}').username
+            
+            setUser(userName) 
         }
         console.log(user);
         

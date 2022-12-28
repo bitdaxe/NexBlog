@@ -1,5 +1,5 @@
 import {StateCreator} from 'zustand'
-import { IAuth } from '../types/IAuth';
+import { IAuth, IUser } from '../types/IAuth';
 import axios from 'axios'
 import { API_URL } from '../../config';
 import Cookies from 'js-cookie';
@@ -7,9 +7,16 @@ import Cookies from 'js-cookie';
 
 const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
     isAuthenticated: false,
-    user: {},
+    user: null,
     setIsAuth(value){
         set(state => ({...state, isAuthenticated: value}))
+    },
+    loadUser(){
+        if(localStorage.getItem('user')){
+            let User = JSON.parse(localStorage.getItem('user') || '{}')
+            set(state => ({...state, user: User}))
+        }
+     
     },
     login({username, password}, router) {
         axios.post(`${API_URL}/account/login/` , {username, password}, {withCredentials: true, headers:{
@@ -21,7 +28,7 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
                 localStorage.setItem('authenticated', 'true')    
     
                 
-                localStorage.setItem('user', res.data.data)
+                localStorage.setItem('user', JSON.stringify(res.data))
 
                 router.push('/')
                 
@@ -54,9 +61,9 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
         .then(res=>{
             console.log(res);
             if(res.status == 201){
-                set(state => ({...state, isAuthenticated: true, user: {email: res.data.email, username: res.data.username}}))   
+                set(state => ({...state, isAuthenticated: true, user: {email: res.data.email, username: res.data.username, id: res.data.id}}))   
                 localStorage.setItem('authenticated', 'true') 
-                localStorage.setItem('user', res.data.username) 
+                localStorage.setItem('user', JSON.stringify(res.data))
                 get().login({username, password}, router)
           
             }

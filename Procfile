@@ -1,0 +1,1 @@
+web: gunicorn nextblog.wsgi --log-file

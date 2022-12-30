@@ -4,16 +4,20 @@
 
 h1{
     font-size: 32pt;
+    font-family:var(--font-mono);
 }
 
 h2{
     font-size: 26pt;
+    font-family:var(--font-mono);
 }
 h3{
     font-size: 22pt;
+    font-family:var(--font-mono);
 }
 
 h4{
     font-size: 20pt;
+    font-family:var(--font-mono);
 }
 

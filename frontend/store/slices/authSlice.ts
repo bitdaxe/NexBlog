@@ -36,6 +36,9 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
 
                 router.push('/') 
             }
+
+
+
         }catch(err){
             get().toggleError();
             console.log(err);

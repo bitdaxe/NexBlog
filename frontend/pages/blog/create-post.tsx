@@ -17,8 +17,6 @@ const MarkdownEditor = dynamic(
   { ssr: false }
 );
 
-// import MDEditor from '@uiw/react-md-editor';
-
 const MakePost = () => {
     const router = useRouter();
     const [blog, setBlog] = useState({title:"", description:"",blog:""})
@@ -37,20 +35,21 @@ const MakePost = () => {
         
     }
     
-      const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void =>{
+      const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
             e.preventDefault();
-            axios.post(`${API_URL}/api/create-blog/`, { title: blog.title, description: blog.description, blog: value }, {withCredentials: true, headers:{
-                'X-CSRFToken': Cookies.get('csrftoken')
-            }})
-            .then(res=>{
-                if(res.status == 201){
+
+            try {
+                const res =  await axios.post(`${API_URL}/api/create-blog/`, { title: blog.title, description: blog.description, blog: value }, {withCredentials: true, headers:{
+                    'X-CSRFToken': Cookies.get('csrftoken')
+                }});
+
+                if (res.status == 201){
                     router.push(`/blog/${res.data.id}`);
-                }                
-            })
-            .catch(err=>{
-                console.log(err);
-                
-            } )
+                }
+            } catch (error) {
+                console.log(error);                
+            }
+    
       }
 
   return <>

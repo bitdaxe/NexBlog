@@ -165,8 +165,6 @@ const atomDark = {
     }
   };
 
-import remarkGfm from 'remark-gfm'
-
 interface Blog{
     title: string, blog: string, description: string, id:number, owner: string
 }
@@ -208,9 +206,7 @@ const Post = () => {
       
     } catch (error) {
       console.log(error);
-      
     }
-   
   }
 
   return <>
@@ -220,6 +216,10 @@ const Post = () => {
             a{
                 color:cyan;
                 text-decoration: underline;
+            }
+            img{
+              width: auto;
+              height: 300px;
             }
       `}</style>
         <div className='mt-16 p-4 text-white'>
@@ -232,7 +232,7 @@ const Post = () => {
                 <p className='mb-10'>{blog.description}</p>
             </div>
 
-            <div>
+            <div className='text-right'>
               {user != null && user.username == blog.owner ? <>
                 <button className="mx-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 <Link className='no-underline text-white' href={`/editBlog/${id}`}> Edit </Link> 
@@ -244,8 +244,6 @@ const Post = () => {
              
             </div>
           </div>
-              
-                {/* <ReactMarkdown remarkPlugins={[remarkGfm]}  children={blog.blog} /> */}
                 <ReactMarkdown
                     children={blog.blog}
                     components={{

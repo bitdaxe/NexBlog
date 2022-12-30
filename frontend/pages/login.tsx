@@ -4,6 +4,7 @@ import { API_URL } from "../config";
 import useStore from "../store/useStore";
 import Navbar from "../components/navbar";
 import { useRouter } from 'next/router'
+import Link from "next/link";
 
 
 const LoginPage: FC = (): JSX.Element => {
@@ -51,9 +52,9 @@ const LoginPage: FC = (): JSX.Element => {
             <div className="flex items-center justify-between">
                 <input className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value='Login'/>
 
-                <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                <Link href="/forgotpass" className="inline-block align-baseline font-bold text-sm text-blue-500 " >
                 Forgot Password?
-                </a>
+                </Link>
               
             </div>
             </form>

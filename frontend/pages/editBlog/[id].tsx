@@ -64,7 +64,7 @@ const MakePost = () => {
         
     }
     
-      const handleSubmit = async (e:React.FormEvent<HTMLFormElement>): void =>{
+      const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
             e.preventDefault();
 
             try {
@@ -77,21 +77,7 @@ const MakePost = () => {
                 }
             } catch (error) {
                 console.log(error);
-                
             }
-         
-
-            // .then(res=>{
-            //     console.log(res);
-                
-            //     if(res.status == 201){
-            //         router.push(`/blog/${res.data.id}`);
-            //     }                
-            // })
-            // .catch(err=>{
-            //     console.log(err);
-                
-            // } )
       }
 
   return <>

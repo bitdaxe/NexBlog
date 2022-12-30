@@ -7,6 +7,8 @@ export interface IUser{
 export interface IAuth{
     isAuthenticated: boolean,
     user: IUser | null,
+    error: boolean,
+    toggleError: ()=> void,
     logout: ()=> void,
     loadUser: ()=> void,
     setIsAuth: (value: boolean)=> void,

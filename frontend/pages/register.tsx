@@ -35,7 +35,7 @@ const RegisterPage: FC = (): JSX.Element => {
             <div className="container mx-auto xl:px-44 mt-32 mb-32">
             
             <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-slate-700 text-white">
-            <h1 className='text-center text-4xl font-mono'>NexBlog Register</h1>
+            <h1 className='text-center text-4xl font-mono'>NextBlog Register</h1>
             <div className="mb-4 ">
                 <label className="block  text-sm font-bold mb-2" htmlFor="username">
                 Username
@@ -61,7 +61,7 @@ const RegisterPage: FC = (): JSX.Element => {
                 <input name='confirmpassword' onChange={handleChange} className="text-black shadow appearance-none border rounded w-full py-2 px-3  mb-3 " id="cpassword" type="password" placeholder="******************"/>
             </div>
             <div className="flex items-center justify-between">
-                <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value='Register'/>
+                <input className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value='Register'/>
                 
                
                 <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

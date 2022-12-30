@@ -11,6 +11,10 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
     setIsAuth(value){
         set(state => ({...state, isAuthenticated: value}))
     },
+    error: false,
+    toggleError(){
+        set(state=> ({...state, error: !state.error}))
+    },
     loadUser(){
         if(localStorage.getItem('user')){
             let User = JSON.parse(localStorage.getItem('user') || '{}')
@@ -33,6 +37,7 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
                 router.push('/') 
             }
         }catch(err){
+            get().toggleError();
             console.log(err);
         }      
     },

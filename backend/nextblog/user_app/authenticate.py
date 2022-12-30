@@ -15,17 +15,14 @@ class CustomAuthentication(jwt_authentication.JWTAuthentication):
     def authenticate(self, request):
         header = self.get_header(request)
         raw_token = request.COOKIES.get('access') or None 
-        # print(raw_token)
-        # print("we here")
         if header is None:
             pass
         else:
             raw_token = self.get_raw_token(header)
-        # print("we here1")
+            
         if raw_token is None:
             return None
         
-        # print("we here")
         validated_token = self.get_validated_token(raw_token)
         enforce_csrf(request)
         return self.get_user(validated_token), validated_token

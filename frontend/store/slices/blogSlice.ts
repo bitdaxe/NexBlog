@@ -15,24 +15,7 @@ const createBlogSlice: StateCreator<IBlog> = (set)=>({
             }})
             
             set(state => ({...state, blogs: res.data}))
-            console.log(res);
-            
-            // fetch(`${API_URL}/api/blogs/`, {
-            //     mode: "cors",
-            //     method: "get",
-            //     credentials: 'same-origin'
-            //  })
-            //  .then(res=> res.json())
-            //  .then(data=>{
-            //     console.log(data);
-                
-            //  }).catch(err=>{
-            //     console.log(err);
-                
-            //  })
-
-          
-
+            console.log(res);      
 
         } catch (error) {
             console.log(error);

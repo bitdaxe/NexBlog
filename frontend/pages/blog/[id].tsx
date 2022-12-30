@@ -7,6 +7,9 @@ import { API_URL } from '../../config'
 import ReactMarkdown from 'react-markdown'
 import MarkdownRenderer from 'react-markdown-renderer';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import Cookies from 'js-cookie';
+import useStore from '../../store/useStore'
+import Link from 'next/link'
 
 const atomDark = {
     "code[class*=\"language-\"]": {
@@ -171,7 +174,7 @@ interface Blog{
 const Post = () => {
   const router = useRouter()
   const { id } = router.query
-
+  const user = useStore(state => state.user)
   const [blog, setBlog] = useState<Blog>()
 
   useEffect(()=>{
@@ -195,6 +198,21 @@ const Post = () => {
     })
   }, [id])
 
+  const  handleDelete = async () =>{
+    try {
+      const res = await axios.delete(`${API_URL}/api/blogdu/${id}`,{withCredentials: true, headers:{
+        'X-CSRFToken': Cookies.get('csrftoken')
+      }})
+      
+      router.push('/');
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+   
+  }
+
   return <>
 
         <Navbar/>
@@ -207,9 +225,26 @@ const Post = () => {
         <div className='mt-16 p-4 text-white'>
             {blog != null ? 
             <div>
-                <h5 className="mb-2 text-2xl font-bold tracking-tight  dark:text-white">{blog.title}</h5>
+              <div className="grid grid-cols-4 gap-4">
+            <div className='col-span-3'>
+              <h5 className="mb-2 text-2xl font-bold tracking-tight  dark:text-white">{blog.title}</h5>
                 <p className='mb-10'>Author: {blog.owner}</p>
                 <p className='mb-10'>{blog.description}</p>
+            </div>
+
+            <div>
+              {user != null && user.username == blog.owner ? <>
+                <button className="mx-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                <Link className='no-underline text-white' href={`/editBlog/${id}`}> Edit </Link> 
+              </button>
+              <button onClick={handleDelete} className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">
+                Delete
+              </button>
+              </> : null}
+             
+            </div>
+          </div>
+              
                 {/* <ReactMarkdown remarkPlugins={[remarkGfm]}  children={blog.blog} /> */}
                 <ReactMarkdown
                     children={blog.blog}

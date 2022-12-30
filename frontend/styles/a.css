@@ -2,3 +2,9 @@ a{
     color:cyan;
     text-decoration: underline;
 }
+
+.w-md-editor-text-pre > code,
+.w-md-editor-text-input {
+  font-size: 21px !important;
+  line-height: 24px !important;
+}

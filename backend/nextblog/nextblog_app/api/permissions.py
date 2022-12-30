@@ -9,3 +9,4 @@ class TPermission(BasePermission):
     def has_permission(self, request, view):
         print(request.user)
         return True
+    

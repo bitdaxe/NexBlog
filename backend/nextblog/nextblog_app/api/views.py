@@ -3,7 +3,7 @@ from nextblog_app.models import Blog
 from nextblog_app.api.serializer import BlogSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from user_app.authenticate import CustomAuthentication
-from nextblog_app.api.permissions import TPermission
+from nextblog_app.api.permissions import TPermission, IsOwnerOfBLog
 
 # get blogs for (home page)
 class GetBlogView(generics.RetrieveAPIView):
@@ -32,3 +32,10 @@ class CreateBlogsView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         req = serializer.context['request']
         serializer.save(owner=req.user)
+
+# delete update
+class DeleteUpdateBlogView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwnerOfBLog]
+    model = Blog
+    serializer_class = BlogSerializer
+    queryset = Blog.objects.all()

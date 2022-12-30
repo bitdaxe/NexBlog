@@ -11,11 +11,10 @@ import Link from "next/link";
 const HomePage = (): JSX.Element=>{
   const loadBlogs = useStore(state=> state.loadBlogs)
   const blogs = useStore(state => state.blogs)
-  const loadUser = useStore(state => state.loadUser)
 
   useEffect(()=>{
     loadBlogs()
-    loadUser()
+   
   }, [])
 
   return(

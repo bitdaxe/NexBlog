@@ -33,7 +33,7 @@ const createAuthSlice: StateCreator<IAuth> = (set, get)=>({
 
                 localStorage.setItem('authenticated', 'true')   
                 localStorage.setItem('user', JSON.stringify(res.data))
-
+                get().loadUser();
                 router.push('/') 
             }
 

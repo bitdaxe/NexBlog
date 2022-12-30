@@ -68,7 +68,7 @@ const MakePost = () => {
             </div>
             <div data-color-mode="light" className="mt-10 border p-4 rounded">
                  <label htmlFor="description" className="text-lg font-thin  mb-2">Blog Post</label>
-                <MarkdownEditor  height={'500'} value={value} onChange={setValue} />
+                <MarkdownEditor style={{height:500}} value={value} onChange={setValue} />
             </div>
             <div className="flex mt-4">
             <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg  w-full transition duration-500 shadow-lg">Submit</button>
